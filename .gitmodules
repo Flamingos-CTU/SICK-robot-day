@@ -1,0 +1,3 @@
+[submodule "src/barebox-overo"]
+	path = src/barebox-overo
+	url = git@github.com:Flamingos-CTU/barebox.git
