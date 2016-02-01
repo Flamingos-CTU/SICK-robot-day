@@ -1,0 +1,5 @@
+*
+!GNUmakefile
+!.config
+!.gitignore
+!*.patch
