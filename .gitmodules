@@ -4,3 +4,6 @@
 [submodule "src/linux-stable"]
 	path = src/linux-stable
 	url =  git@github.com:Flamingos-CTU/linux.git
+[submodule "src/buildroot-stable"]
+	path = src/buildroot-stable
+	url = git@github.com:Flamingos-CTU/buildroot.git
