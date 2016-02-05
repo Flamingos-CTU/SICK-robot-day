@@ -1,0 +1,7 @@
+*
+!.config
+!.gitignore
+!GNUmakefile
+!prepare_boot
+!overlay/
+!busybox.config
