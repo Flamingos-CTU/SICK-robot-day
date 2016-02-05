@@ -1,22 +1,30 @@
-KERNELSRC    := ../../src/barebox-overo/
+export ARCH=arm
+export TOOLCHAIN_PATH= /opt/OSELAS.Toolchain-2014.12.1/arm-v7a-linux-gnueabihf/gcc-4.9.2-glibc-2.20-binutils-2.24-kernel-3.16-sanitized/bin
+export CROSS_COMPILE=$(TOOLCHAIN_PATH)/arm-v7a-linux-gnueabihf-
+
+KERNELSRC    := ../../../src/barebox-overo/
 KERNELOUTPUT += $(PWD)
 
 MAKEFLAGS += --no-print-directory
 
-.PHONY: all install-tftp install-sd $(MAKECMDGOALS)
+SD_PATH=/media/$(USER)/boot
 
-export ARCH=arm
-export CROSS_COMPILE=arm-linux-gnueabi-
+include /etc/default/tftpd-hpa
+TFTP_PATH=$(TFTP_DIRECTORY)/overo/boot
+
+.PHONY: all install-tftp install-sd $(MAKECMDGOALS)
 
 all:
 	$(MAKE) $(MAKEFLAGS) -C $(KERNELSRC) O=$(KERNELOUTPUT)
 
-install-tftp:
-	install -d /srv/tftp/overo
-	cp images/barebox-overo-mlo.img /srv/tftp/overo/MLO
-
 install-sd:
-	cp images/barebox-overo-mlo.img /media/$(USER)/boot/MLO
+	install barebox-flash-image $(SD_PATH)/MLO
+
+install-tftp: $(TFTP_PATH)
+	install barebox-flash-image $(TFTP_PATH)/MLO
+
+$(TFTP_PATH):
+	install --directory $@
 
 Makefile:;
 
