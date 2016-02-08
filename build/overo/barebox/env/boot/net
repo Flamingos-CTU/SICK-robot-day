@@ -1,0 +1,12 @@
+#!/bin/sh
+
+global bootm.image="/mnt/tftp/overo/boot/zImage"
+global bootm.oftree="/mnt/tftp/overo/boot/omap3-overo-chestnut43.dtb"
+
+global linux.bootargs.console="console=tty1 console=ttyO2,115200n8"
+global linux.bootargs.display="mpurate=auto vram=12M omapfb.mode=lcd:480x272MR-16@60 fb.debug=y omapdss.def_disp=lcd43 fbcon=font:6x10"
+
+bootargs-ip
+
+nfsroot="/srv/tftp/overo/rootfs"
+global linux.bootargs.dyn.root="root=/dev/nfs nfsroot=$nfsroot,v3,tcp rw"

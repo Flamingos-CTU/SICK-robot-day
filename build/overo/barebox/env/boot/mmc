@@ -1,0 +1,8 @@
+#!/bin/sh
+
+global bootm.image="/boot/zImage"
+global bootm.oftree="/boot/omap3-overo-chestnut43.dtb"
+
+global linux.bootargs.console="console=tty1 console=ttyO2,115200n8"
+global linux.bootargs.display="mpurate=auto vram=12M omapfb.mode=lcd:480x272MR-16@60 fb.debug=y omapdss.def_disp=lcd43 fbcon=font:6x10"
+global linux.bootargs.dyn.root="root=/dev/mmcblk0p2 rootfstype=ext3 rootwait rw"
