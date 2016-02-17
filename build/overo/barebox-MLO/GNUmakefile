@@ -17,14 +17,16 @@ TFTP_PATH=$(TFTP_DIRECTORY)/overo/boot
 all:
 	$(MAKE) $(MAKEFLAGS) -C $(KERNELSRC) O=$(KERNELOUTPUT)
 
-install-sd:
+install-sd: barebox-flash-image
 	install barebox-flash-image $(SD_PATH)/MLO
 
-install-tftp: $(TFTP_PATH)
+install-tftp: $(TFTP_PATH) barebox-flash-image
 	install barebox-flash-image $(TFTP_PATH)/MLO
 
 $(TFTP_PATH):
 	install --directory $@
+
+barebox-flash-image: all
 
 Makefile:;
 

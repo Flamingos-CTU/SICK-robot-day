@@ -24,16 +24,18 @@ env: all
 all:
 	$(MAKE) $(MAKEFLAGS) -C $(KERNELSRC) O=$(KERNELOUTPUT)
 
-install-sd:
+install-sd: barebox-flash-image
 	install barebox-flash-image $(SD_PATH)/barebox.bin
 	install $(ENV_IMAGE) $(SD_PATH)
 
-install-tftp: $(TFTP_PATH)
+install-tftp: $(TFTP_PATH) barebox-flash-image
 	install barebox-flash-image $(TFTP_PATH)/barebox.bin
 	install $(ENV_IMAGE) $(TFTP_PATH)
 
 $(TFTP_PATH):
 	install --directory $@
+
+barebox-flash-image: env
 
 clean mrproper:
 	@rm -f $(ENV_IMAGE)
